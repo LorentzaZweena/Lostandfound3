@@ -15,23 +15,26 @@
 <body>
 
 <div class="sidebar shadow-sm text-center">
-    <i class='bx bx-home'></i>
-    <i class='bx bx-user'></i>
-    <i class='bx bx-folder'></i>
+    <a href="#"><i class='bx bx-home'></i></a>
+    <a href="#"><i class='bx bx-user'></i></a>
+    <a href="#"><i class='bx bx-folder'></i></a>
 </div>
 
 <div class="main container py-4">
     <h4 class="fw-bold mb-4">Profile Dashboard</h4>
     <div class="row g-4">
-        <div class="col-md-4">
+        <div class="col-12 col-md-4">
             <div class="card-custom bg-white shadow-sm text-center">
 
                 <img src="{{ $user->profile_photo ? asset($user->profile_photo) : asset('img/pp.jpg') }}" class="profile-img mb-3">
                 <h5 class="fw-bold">{{ $user->name }}</h5>
-                <span class="badge bg-success mb-3">Active User</span>
-                <div class="">
-                    <a href="/report" class="btn btn-primary rounded-pill px-4">
-                        Add New Report
+                <div class="d-flex gap-2 mt-3 justify-content-center flex-wrap w-100">
+                    <a href="/report" class="btn btn-primary rounded-pill px-3 w-100 w-md-auto">
+                        <i class='bx bx-plus'></i> Add Report
+                    </a>
+
+                    <a href="#" class="btn btn-outline-secondary rounded-pill px-3 w-100 w-md-auto">
+                        <i class='bx bx-image'></i> Upload Photo
                     </a>
                 </div>
                 <hr>
@@ -67,7 +70,7 @@
             <div class="card-custom bg-white shadow-sm">
                 <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
                     <h6 class="fw-bold mb-0">Your Reports</h6>
-                    <div class="d-flex gap-4">
+                    <div class="d-flex gap-3 flex-wrap">
                         <a href="{{ url('/profile') }}"
                         class="filter-tab {{ !$status ? 'active-tab' : '' }}">
                             All
@@ -85,7 +88,7 @@
                     </div>
                 </div>
                 @forelse($items as $item)
-                <div class="d-flex justify-content-between align-items-center mb-3" data-bs-toggle="modal" data-bs-target="#itemModal{{ $item->id }}" style="cursor:pointer;">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3" data-bs-toggle="modal" data-bs-target="#itemModal{{ $item->id }}" style="cursor:pointer;">
                     <div>
                         <strong>{{ $item->title }}</strong><br>
                         <small class="text-muted">{{ $item->created_at->format('d M Y') }}</small>
@@ -96,7 +99,7 @@
                     </span>
                 </div>
                 <div class="modal fade" id="itemModal{{ $item->id }}" tabindex="-1">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Edit Report</h5>
