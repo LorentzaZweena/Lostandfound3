@@ -46,6 +46,7 @@
                 <form method="POST" action="/report" enctype="multipart/form-data">
                     @csrf
 
+                    <input type="text" name="website" style="display:none">
                     <div class="mb-3">
                         <label class="form-label">Item Name</label>
                         <input type="text" name="title" class="form-control" placeholder="Wallet, Phone, Bag...">
