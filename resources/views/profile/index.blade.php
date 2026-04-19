@@ -15,7 +15,7 @@
 <body>
 
 <div class="sidebar shadow-sm text-center">
-    <a href="#"><i class='bx bx-home'></i></a>
+    <a href="/"><i class='bx bx-home'></i></a>
     <a href="#"><i class='bx bx-user'></i></a>
     <a href="#"><i class='bx bx-folder'></i></a>
 </div>
@@ -23,19 +23,25 @@
 <div class="main container py-4">
     <h4 class="fw-bold mb-4">Profile Dashboard</h4>
     <div class="row g-4">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-12 col-md-4">
             <div class="card-custom bg-white shadow-sm text-center">
 
-                <img src="{{ $user->profile_photo ? asset($user->profile_photo) : asset('img/pp.jpg') }}" class="profile-img mb-3">
+                <img src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : asset('img/pp.jpg') }}" class="profile-img mb-3">
                 <h5 class="fw-bold">{{ $user->name }}</h5>
-                <div class="d-flex gap-2 mt-3 justify-content-center flex-wrap w-100">
-                    <a href="/report" class="btn btn-primary rounded-pill px-3 w-100 w-md-auto">
+                <div class="d-flex flex-column flex-md-row gap-2 mt-3 w-100">
+                    <a href="/report" class="btn btn-primary rounded-pill w-100">
                         <i class='bx bx-plus'></i> Add Report
                     </a>
 
-                    <a href="#" class="btn btn-outline-secondary rounded-pill px-3 w-100 w-md-auto">
+                    <form action="/profile/photo" method="POST" enctype="multipart/form-data" class="w-100">
+
+                    @csrf
+                    <label class="btn btn-outline-secondary rounded-pill w-100 mb-0">
                         <i class='bx bx-image'></i> Upload Photo
-                    </a>
+                        <input type="file" name="photo" hidden onchange="this.form.submit()">
+                    </label>
+                </form>
+
                 </div>
                 <hr>
                 <p class="mb-1"><strong>Email:</strong></p>
@@ -43,7 +49,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="row g-3 mb-3">
                 <div class="col-md-4">
                     <div class="stat-box shadow-sm">

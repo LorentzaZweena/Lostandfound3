@@ -22,5 +22,6 @@ Route::get('/profile', function () {
 })->middleware('auth');
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->middleware('auth');
 
 require __DIR__.'/auth.php';

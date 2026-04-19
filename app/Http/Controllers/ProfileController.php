@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -77,5 +78,27 @@ class ProfileController extends Controller
             return view('profile.index', compact(
                 'user', 'items', 'totalReports', 'lost', 'found', 'status'
             ));
+        }
+
+        public function updatePhoto(Request $request)
+        {
+            $request->validate([
+                'photo' => 'required|image|max:2048'
+            ]);
+
+            $user = Auth::user();
+
+            if ($request->hasFile('photo')) {
+                $oldPhoto = $user->profile_photo;
+                $path = $request->file('photo')->store('profiles', 'public');
+                $user->profile_photo = $path;
+                $user->save();
+
+                if ($oldPhoto) {
+                    Storage::disk('public')->delete($oldPhoto);
+                }
+            }
+
+            return back()->with('success', 'Profile photo updated!');
         }
 }
