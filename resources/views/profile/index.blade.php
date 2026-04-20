@@ -15,8 +15,8 @@
 <body>
 
 <div class="sidebar shadow-sm text-center">
-    <a href="/"><i class='bx bx-home'></i></a>
-    <a href="#"><i class='bx bx-user'></i></a>
+    <a href="{{ url('/') }}"><i class='bx bx-home'></i></a>
+    <a href="/profile/edit"><i class='bx bx-user'></i></a>
     <a href="#"><i class='bx bx-folder'></i></a>
 </div>
 
